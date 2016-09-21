@@ -28,7 +28,7 @@ public class BrainActivity extends AppCompatActivity {
     int score = 0;
     int totalQuestions = 0;
 
-    public void playAgain(View view) {
+    public void playAgain(View view) { //resets everything if the user wants to play again
 
         score = 0;
         totalQuestions = 0;
@@ -40,7 +40,7 @@ public class BrainActivity extends AppCompatActivity {
 
         generateQuestion();
 
-        new CountDownTimer(30100, 1000) {
+        new CountDownTimer(30100, 1000) { //creates the timer
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -50,7 +50,7 @@ public class BrainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFinish() {
+            public void onFinish() { //when the time is up
 
                 playAgainButton.setVisibility(View.VISIBLE);
                 timerTextView.setText("0");
@@ -60,7 +60,7 @@ public class BrainActivity extends AppCompatActivity {
         }.start();
     }
 
-    public void generateQuestion() {
+    public void generateQuestion() { //creates random question & answers
 
         Random rand = new Random();
 
@@ -79,7 +79,7 @@ public class BrainActivity extends AppCompatActivity {
 
             if (i == locationOfCorrectAnswer) {
 
-                answers.add(a + b);
+                answers.add(a + b); //correct answer generation
 
             } else {
 
@@ -87,7 +87,7 @@ public class BrainActivity extends AppCompatActivity {
 
                 while (incorrectAnswer == a + b) {
 
-                    incorrectAnswer = rand.nextInt(41);
+                    incorrectAnswer = rand.nextInt(41); //incorrect answer generation
 
                 }
 
@@ -95,7 +95,8 @@ public class BrainActivity extends AppCompatActivity {
 
             }
         }
-
+        
+        //attaches answers to buttons
         button0.setText(Integer.toString(answers.get(0)));
         button1.setText(Integer.toString(answers.get(1)));
         button2.setText(Integer.toString(answers.get(2)));
@@ -103,16 +104,16 @@ public class BrainActivity extends AppCompatActivity {
 
     }
 
-    public void chooseAnswer(View view) {
+    public void chooseAnswer(View view) { //selects the chosen answer
 
         if (view.getTag().toString().equals(Integer.toString(locationOfCorrectAnswer))) {
 
             score++;
-            resultTextView.setText("CORRECT");
+            resultTextView.setText("CORRECT"); //WINNER!! :)
 
         } else {
 
-            resultTextView.setText("INCORRECT");
+            resultTextView.setText("INCORRECT"); //LOSER!! :(
 
         }
 
@@ -121,7 +122,7 @@ public class BrainActivity extends AppCompatActivity {
         generateQuestion();
     }
 
-    public void start(View view) {
+    public void start(View view) { //start button
 
         startButton.setVisibility(View.INVISIBLE);
 
